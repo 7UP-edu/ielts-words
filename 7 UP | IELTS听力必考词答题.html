@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 UP｜IELTS—听力必考词</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #0a0d14;
+    --card: #111520;
+    --card2: #161c2e;
+    --border: #1e2740;
+    --accent: #4f8fff;
+    --accent2: #7c3aed;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #f59e0b;
+    --text: #e8eaf2;
+    --muted: #6b7496;
+    --muted2: #8892b0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sora', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,143,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,143,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app { position: relative; z-index: 1; min-height: 100vh; }
+
+  /* ---- TOP NAV ---- */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,13,20,0.8);
+    backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo { font-size: 17px; font-weight: 800; letter-spacing: 0.03em; color: var(--accent); }
+  .nav-logo span { color: var(--muted2); font-weight: 400; font-size: 13px; }
+  .nav-stats { display: flex; gap: 20px; font-size: 12px; color: var(--muted); }
+  .nav-stats b { color: var(--text); font-size: 14px; }
+
+  /* ---- SCREENS ---- */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ---- HOME SCREEN ---- */
+  .home {
+    max-width: 860px; margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  .home-hero {
+    text-align: center; margin-bottom: 56px;
+  }
+  .home-hero h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, #e8eaf2 0%, #4f8fff 60%, #7c3aed 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .home-hero p { color: var(--muted2); font-size: 15px; line-height: 1.7; max-width: 480px; margin: 0 auto; }
+
+  .overall-stats {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+    margin-bottom: 48px;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px;
+    text-align: center;
+  }
+  .stat-card .val { font-size: 32px; font-weight: 800; color: var(--accent); }
+  .stat-card .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .days-section h2 {
+    font-size: 14px; font-weight: 600; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .days-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .day-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 16px;
+    cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .day-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .day-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .day-card:hover::after { opacity: 0.06; }
+  .day-card .day-num { font-size: 11px; color: var(--muted); margin-bottom: 6px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+  .day-card .day-range { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+  .day-card .day-bar { height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .day-card .day-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+  .day-card .day-meta { font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; }
+  .day-card .day-meta .acc { font-weight: 700; }
+  .day-card.done { border-color: rgba(34,197,94,0.3); }
+  .day-card.done .day-num { color: var(--green); }
+  .day-badge {
+    position: absolute; top: 12px; right: 12px;
+    width: 18px; height: 18px; border-radius: 50%;
+    font-size: 10px; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .day-badge.complete { background: rgba(34,197,94,0.2); color: var(--green); }
+
+  /* ---- QUIZ SCREEN ---- */
+  .quiz-wrap {
+    max-width: 700px; margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+
+  .quiz-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .back-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    border: 1px solid var(--border); background: var(--card);
+    color: var(--muted2); cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .quiz-header-info { flex: 1; }
+  .quiz-header-info h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .quiz-header-info p { font-size: 12px; color: var(--muted); }
+
+  .progress-wrap { margin-bottom: 32px; }
+  .progress-top { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .progress-top span:last-child { color: var(--text); font-weight: 700; }
+  .progress-bar { height: 4px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+  /* score strip */
+  .score-strip {
+    display: flex; gap: 10px; margin-bottom: 28px;
+  }
+  .score-chip {
+    flex: 1; padding: 10px 0; border-radius: 10px;
+    text-align: center; border: 1px solid var(--border);
+    background: var(--card);
+  }
+  .score-chip .sc-val { font-size: 22px; font-weight: 800; }
+  .score-chip .sc-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .score-chip.correct { border-color: rgba(34,197,94,0.3); }
+  .score-chip.correct .sc-val { color: var(--green); }
+  .score-chip.wrong { border-color: rgba(239,68,68,0.3); }
+  .score-chip.wrong .sc-val { color: var(--red); }
+  .score-chip.acc { border-color: rgba(79,143,255,0.3); }
+  .score-chip.acc .sc-val { color: var(--accent); }
+
+  /* card */
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px; padding: 40px 36px;
+    margin-bottom: 24px;
+    position: relative; overflow: hidden;
+    min-height: 220px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .quiz-card::before {
+    content: ''; position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(79,143,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .word-num { font-size: 11px; color: var(--muted); margin-bottom: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .word-en {
+    font-size: clamp(32px, 8vw, 56px);
+    font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 0%, #b0c4ff 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+  }
+  .word-hint { font-size: 13px; color: var(--muted); font-style: italic; }
+
+  /* input area */
+  .answer-area { margin-bottom: 20px; }
+  .answer-label { font-size: 12px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .answer-input {
+    width: 100%; padding: 16px 20px;
+    background: var(--card2); border: 1.5px solid var(--border);
+    border-radius: 12px; color: var(--text);
+    font-size: 18px; font-family: 'Noto Sans SC', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .answer-input:focus { border-color: var(--accent); }
+  .answer-input.correct-input { border-color: var(--green); background: rgba(34,197,94,0.06); }
+  .answer-input.wrong-input { border-color: var(--red); background: rgba(239,68,68,0.06); }
+
+  /* feedback */
+  .feedback {
+    border-radius: 12px; padding: 14px 18px;
+    margin-bottom: 20px; font-size: 14px; line-height: 1.6;
+    display: none; animation: slideUp 0.25s ease;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: #86efac; }
+  .feedback.wrong { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
+  .feedback strong { display: block; font-size: 16px; margin-bottom: 4px; }
+  @keyframes slideUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+  /* option buttons (multiple choice mode) */
+  .options-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 20px;
+  }
+  .opt-btn {
+    padding: 14px 16px; border-radius: 12px;
+    border: 1.5px solid var(--border); background: var(--card2);
+    color: var(--text); font-size: 15px;
+    font-family: 'Noto Sans SC', sans-serif;
+    cursor: pointer; transition: all 0.15s; text-align: left;
+    line-height: 1.4;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--accent); background: rgba(79,143,255,0.08); }
+  .opt-btn.selected-correct { border-color: var(--green); background: rgba(34,197,94,0.12); color: #86efac; }
+  .opt-btn.selected-wrong { border-color: var(--red); background: rgba(239,68,68,0.12); color: #fca5a5; }
+  .opt-btn.reveal-correct { border-color: var(--green); background: rgba(34,197,94,0.08); }
+  .opt-btn:disabled { cursor: default; }
+
+  /* action buttons */
+  .action-row { display: flex; gap: 10px; }
+  .btn {
+    flex: 1; padding: 15px 20px; border-radius: 12px;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    border: none; transition: all 0.15s;
+    font-family: 'Sora', sans-serif;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--card2); color: var(--muted2);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* mode toggle */
+  .mode-toggle {
+    display: flex; gap: 8px; margin-bottom: 20px;
+  }
+  .mode-btn {
+    flex: 1; padding: 9px; border-radius: 9px;
+    font-size: 12px; font-weight: 600;
+    border: 1.5px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; transition: all 0.15s;
+    font-family: 'Sora', sans-serif;
+  }
+  .mode-btn.active { border-color: var(--accent); background: rgba(79,143,255,0.1); color: var(--accent); }
+
+  /* ---- RESULT SCREEN ---- */
+  .result-wrap {
+    max-width: 600px; margin: 0 auto;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .result-emoji { font-size: 64px; margin-bottom: 20px; }
+  .result-wrap h2 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+  .result-wrap p { color: var(--muted2); margin-bottom: 40px; font-size: 15px; }
+
+  .result-big {
+    font-size: 80px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .result-label { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+  .result-breakdown {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; margin-bottom: 32px;
+    text-align: left;
+  }
+  .breakdown-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px;
+  }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-row .key { color: var(--muted2); }
+  .breakdown-row .val { font-weight: 700; }
+  .val.g { color: var(--green); }
+  .val.r { color: var(--red); }
+  .val.b { color: var(--accent); }
+
+  /* wrong list */
+  .wrong-list { text-align: left; margin-bottom: 32px; }
+  .wrong-list h3 { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 12px; }
+  .wrong-item {
+    display: flex; justify-content: space-between;
+    background: var(--card); border: 1px solid rgba(239,68,68,0.2);
+    border-radius: 10px; padding: 12px 16px;
+    margin-bottom: 8px; font-size: 14px;
+  }
+  .wrong-item .w-en { font-weight: 700; color: #fca5a5; }
+  .wrong-item .w-zh { color: var(--muted2); font-size: 13px; }
+
+  .result-actions { display: flex; gap: 12px; }
+
+  /* ---- WORD BOOK SCREEN ---- */
+  .wordbook-wrap {
+    max-width: 800px; margin: 0 auto;
+    padding: 32px 24px 80px;
+  }
+  .wordbook-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  .wordbook-header h2 { font-size: 20px; font-weight: 800; }
+  .wordbook-filters { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-btn {
+    padding: 7px 14px; border-radius: 8px;
+    font-size: 12px; font-weight: 600;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--muted); cursor: pointer; transition: all 0.15s;
+    font-family: 'Sora', sans-serif;
+  }
+  .filter-btn.active { border-color: var(--accent); background: rgba(79,143,255,0.1); color: var(--accent); }
+  .word-table { width: 100%; border-collapse: collapse; }
+  .word-table th {
+    text-align: left; font-size: 11px; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 10px 16px; border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .word-table td {
+    padding: 12px 16px; border-bottom: 1px solid rgba(30,39,64,0.6);
+    font-size: 14px;
+  }
+  .word-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .word-table .en-cell { font-weight: 700; font-size: 15px; }
+  .word-table .zh-cell { color: var(--muted2); }
+  .word-table .day-cell { color: var(--muted); font-size: 12px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.correct { background: var(--green); }
+  .status-dot.wrong { background: var(--red); }
+  .status-dot.untried { background: var(--muted); opacity: 0.4; }
+
+  /* toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 20px;
+    font-size: 14px; color: var(--text);
+    z-index: 999; opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; }
+
+  /* ---- BOTTOM NAV ---- */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex;
+    background: rgba(10,13,20,0.9); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--border);
+    padding: 8px 0 12px; z-index: 99;
+  }
+  .bnav-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 4px; padding: 6px 0;
+    cursor: pointer; background: none; border: none;
+    color: var(--muted); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: color 0.15s; font-family: 'Sora', sans-serif;
+  }
+  .bnav-btn .icon { font-size: 20px; line-height: 1; }
+  .bnav-btn.active { color: var(--accent); }
+
+  @media (max-width: 480px) {
+    .quiz-card { padding: 28px 20px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .overall-stats { grid-template-columns: 1fr 1fr 1fr; }
+    .stat-card .val { font-size: 24px; }
+    .days-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- TOP NAV -->
+  <nav class="nav">
+    <div class="nav-logo">📚 7 UP <span>｜ IELTS 听力必考词</span></div>
+    <div class="nav-stats">
+      <div>总进度 <b id="nav-progress">0%</b></div>
+      <div>正确率 <b id="nav-acc">—</b></div>
+    </div>
+  </nav>
+
+  <!-- HOME SCREEN -->
+  <div class="screen active" id="screen-home">
+    <div class="home">
+      <div class="home-hero">
+        <h1>📚 7 UP<br><span style="font-size:0.6em;opacity:0.7">IELTS 听力必考词</span></h1>
+        <p>每天20个单词，系统刷词，记录错题，追踪正确率</p>
+      </div>
+
+      <div class="overall-stats">
+        <div class="stat-card">
+          <div class="val" id="stat-done">0</div>
+          <div class="lbl">已完成天数</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="stat-words">0</div>
+          <div class="lbl">已练习单词</div>
+        </div>
+        <div class="stat-card">
+          <div class="val" id="stat-acc">—</div>
+          <div class="lbl">总体正确率</div>
+        </div>
+      </div>
+
+      <div class="days-section">
+        <h2>选择今天要练习的一天</h2>
+        <div class="days-grid" id="days-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-wrap">
+      <div class="quiz-header">
+        <button class="back-btn" onclick="goHome()">←</button>
+        <div class="quiz-header-info">
+          <h3 id="quiz-title">第1天</h3>
+          <p id="quiz-subtitle">单词 1-20</p>
+        </div>
+      </div>
+
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="mode-mc" onclick="setMode('mc')">📝 选择题</button>
+        <button class="mode-btn" id="mode-type" onclick="setMode('type')">⌨️ 填写题</button>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span id="q-progress-txt">第 1 题，共 20 题</span>
+          <span id="q-progress-pct">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+
+      <div class="score-strip">
+        <div class="score-chip correct"><div class="sc-val" id="sc-correct">0</div><div class="sc-lbl">正确</div></div>
+        <div class="score-chip wrong"><div class="sc-val" id="sc-wrong">0</div><div class="sc-lbl">错误</div></div>
+        <div class="score-chip acc"><div class="sc-val" id="sc-acc">—</div><div class="sc-lbl">正确率</div></div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="word-num" id="word-num">单词 1 / 20</div>
+        <div class="word-en" id="word-en">certificate</div>
+        <div class="word-hint" id="word-hint">请选择或输入中文含义</div>
+      </div>
+
+      <!-- Multiple choice -->
+      <div id="mc-area">
+        <div class="options-grid" id="options-grid"></div>
+      </div>
+
+      <!-- Type area -->
+      <div id="type-area" style="display:none">
+        <div class="answer-area">
+          <div class="answer-label">输入中文含义</div>
+          <input class="answer-input" id="answer-input" type="text" placeholder="输入中文..." autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="action-row" id="action-row">
+        <button class="btn btn-primary" id="btn-check" onclick="checkAnswer()">确认答案</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="screen" id="screen-result">
+    <div class="result-wrap">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <h2 id="result-title">今日完成！</h2>
+      <p id="result-subtitle">继续保持，每天进步一点点</p>
+
+      <div class="result-big" id="result-acc">80%</div>
+      <div class="result-label">今日正确率</div>
+
+      <div class="result-breakdown">
+        <div class="breakdown-row"><span class="key">正确题数</span><span class="val g" id="r-correct">16</span></div>
+        <div class="breakdown-row"><span class="key">错误题数</span><span class="val r" id="r-wrong">4</span></div>
+        <div class="breakdown-row"><span class="key">练习单词</span><span class="val b" id="r-total">20</span></div>
+        <div class="breakdown-row"><span class="key">最高连对</span><span class="val b" id="r-streak">8</span></div>
+      </div>
+
+      <div class="wrong-list" id="wrong-list"></div>
+
+      <div class="result-actions">
+        <button class="btn btn-secondary" onclick="retryWrong()" id="btn-retry">重练错题</button>
+        <button class="btn btn-primary" onclick="goHome()">返回首页</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORD BOOK SCREEN -->
+  <div class="screen" id="screen-book">
+    <div class="wordbook-wrap">
+      <div class="wordbook-header">
+        <div>
+          <h2>单词本</h2>
+          <p style="font-size:13px;color:var(--muted);margin-top:4px;">全部 <span id="book-total">0</span> 个单词</p>
+        </div>
+      </div>
+      <div class="wordbook-filters">
+        <button class="filter-btn active" onclick="filterBook('all')" id="f-all">全部</button>
+        <button class="filter-btn" onclick="filterBook('wrong')" id="f-wrong">❌ 错题</button>
+        <button class="filter-btn" onclick="filterBook('correct')" id="f-correct">✅ 正确</button>
+        <button class="filter-btn" onclick="filterBook('untried')" id="f-untried">○ 未练习</button>
+      </div>
+      <table class="word-table">
+        <thead>
+          <tr>
+            <th>英文</th>
+            <th>中文</th>
+            <th>天数</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody id="book-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="bnav-btn active" id="bnav-home" onclick="showScreen('home')">
+      <span class="icon">🏠</span>首页
+    </button>
+    <button class="bnav-btn" id="bnav-book" onclick="showScreen('book')">
+      <span class="icon">📚</span>单词本
+    </button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// WORD DATA  (全部单词，按天分组，每天20个)
+// ============================================================
+const ALL_WORDS = [
+  // Day 1 (1-20)
+  {en:"certificate",zh:"证明，执照"},
+  {en:"dairy",zh:"牛奶场，乳制品"},
+  {en:"diary",zh:"日记，日记本"},
+  {en:"barrier",zh:"障碍，栅栏"},
+  {en:"operation",zh:"操作，手术，经营，运转"},
+  {en:"insurance",zh:"保险"},
+  {en:"auditorium",zh:"礼堂，观众席"},
+  {en:"refreshment",zh:"恢复，点心（复数）"},
+  {en:"fertilizer",zh:"肥料"},
+  {en:"supervision",zh:"监督"},
+  {en:"subtitle",zh:"副标题，对白，说明，加字幕"},
+  {en:"segment",zh:"部分，段，分割"},
+  {en:"waste",zh:"废物，浪费，滥用，荒地"},
+  {en:"quiz",zh:"测验"},
+  {en:"concrete",zh:"具体的，混凝土"},
+  {en:"theatrical",zh:"剧场的，戏剧的"},
+  {en:"platform",zh:"月台，平台，讲台"},
+  {en:"decoration",zh:"装饰品"},
+  {en:"eyedrop",zh:"眼药水"},
+  {en:"cab",zh:"出租车"},
+  // Day 2 (21-40)
+  {en:"confidential",zh:"秘密的，机密的"},
+  {en:"confident",zh:"自信的，确信的"},
+  {en:"embassy",zh:"大使馆"},
+  {en:"passport",zh:"护照"},
+  {en:"Visa",zh:"签证"},
+  {en:"diploma",zh:"文凭，证书"},
+  {en:"diplomat",zh:"外交官"},
+  {en:"diplomatic",zh:"外交的，有手腕的"},
+  {en:"texture",zh:"纹理，质地"},
+  {en:"material",zh:"材料，物质，实质性的"},
+  {en:"fabric",zh:"织物，布料，结构"},
+  {en:"rural",zh:"农村的，乡村的"},
+  {en:"velvet",zh:"天鹅绒"},
+  {en:"leather",zh:"皮革"},
+  {en:"nylon",zh:"尼龙"},
+  {en:"wool",zh:"羊毛，毛织品"},
+  {en:"whistle",zh:"口哨，汽笛"},
+  {en:"triangle",zh:"三角形"},
+  {en:"trilingual",zh:"三语的"},
+  {en:"square",zh:"正方形，广场，平方"},
+  // Day 3 (41-60)
+  {en:"violin",zh:"小提琴"},
+  {en:"diving",zh:"潜水"},
+  {en:"Scuba diving",zh:"水肺潜水"},
+  {en:"domestic",zh:"国内的，家庭的，驯养的"},
+  {en:"documentary",zh:"纪录片"},
+  {en:"promotion",zh:"提升，促进"},
+  {en:"morale",zh:"士气"},
+  {en:"pottery",zh:"陶器"},
+  {en:"democratic",zh:"民主的"},
+  {en:"mayor",zh:"市长"},
+  {en:"sales",zh:"销售额"},
+  {en:"competition",zh:"比赛，竞争"},
+  {en:"tide",zh:"趋势，潮水，渡过"},
+  {en:"geology",zh:"地质学"},
+  {en:"tin",zh:"锡，罐头"},
+  {en:"mineral",zh:"矿物，无机物，矿泉水"},
+  {en:"loyalty",zh:"忠诚"},
+  {en:"draft",zh:"草稿，牵引，汇票"},
+  {en:"jaw",zh:"颚，下巴，说教"},
+  {en:"supplement",zh:"增刊，附录，补充"},
+  // Day 4 (61-80)
+  {en:"rational",zh:"合理的，理性的"},
+  {en:"bound",zh:"跳跃，界限，装订的，范围"},
+  {en:"carbon",zh:"碳，复写纸"},
+  {en:"recruit",zh:"招聘，新兵"},
+  {en:"cafeteria",zh:"自助餐厅"},
+  {en:"log",zh:"原木，圆木，日志"},
+  {en:"slide",zh:"滑动，幻灯片，下滑"},
+  {en:"maintain",zh:"维持，保养"},
+  {en:"warehouse",zh:"仓库"},
+  {en:"chef",zh:"厨师"},
+  {en:"contamination",zh:"污染"},
+  {en:"religion",zh:"宗教"},
+  {en:"scent",zh:"气味，香味，线索，发觉"},
+  {en:"font",zh:"字体"},
+  {en:"laser",zh:"激光，镭射"},
+  {en:"reflective",zh:"反射的，沉思的，反映的"},
+  {en:"catalogue",zh:"目录，编制目录"},
+  {en:"canteen",zh:"食堂，水壶"},
+  {en:"skeleton",zh:"骨架，纲要"},
+  {en:"desert",zh:"沙漠，遗弃"},
+  // Day 5 (81-100)
+  {en:"grain",zh:"谷物，颗粒"},
+  {en:"sailing",zh:"航行"},
+  {en:"strain",zh:"紧张，拉紧，劳累"},
+  {en:"waterfall",zh:"瀑布"},
+  {en:"gallery",zh:"美术馆，画廊"},
+  {en:"helicopter",zh:"直升飞机"},
+  {en:"fossil",zh:"化石，食古不化的人"},
+  {en:"pianist",zh:"钢琴家"},
+  {en:"harvest",zh:"收获"},
+  {en:"appointment",zh:"约会，任命"},
+  {en:"rubbish",zh:"垃圾"},
+  {en:"administration",zh:"实施，管理，行政部门"},
+  {en:"turbo",zh:"涡轮"},
+  {en:"violation",zh:"违反，妨碍"},
+  {en:"genetic",zh:"遗传的，基因的，起源的"},
+  {en:"circular",zh:"圆形的，循环的，传单"},
+  {en:"concentration",zh:"集中，浓度"},
+  {en:"intact",zh:"原封不动的，安然无恙的"},
+  {en:"exhibition",zh:"展览"},
+  {en:"treasure",zh:"财富"},
+  // Day 6 (101-120)
+  {en:"innovation",zh:"创新"},
+  {en:"intelligent",zh:"聪明的，智能的"},
+  {en:"periodical",zh:"期刊"},
+  {en:"lentil",zh:"扁豆"},
+  {en:"creativity",zh:"创造力"},
+  {en:"thriller",zh:"惊悚小说，惊悚片"},
+  {en:"habitat",zh:"栖息地，产地"},
+  {en:"tolerance",zh:"宽容，忍耐，公差"},
+  {en:"carnivorous",zh:"食肉的"},
+  {en:"vaccination",zh:"接种"},
+  {en:"insect",zh:"昆虫"},
+  {en:"intermediate",zh:"中间的，过渡的"},
+  {en:"slop",zh:"溢出，排泄物"},
+  {en:"clothing",zh:"衣服"},
+  {en:"integrate",zh:"整合"},
+  {en:"spoon",zh:"匙，勺子"},
+  {en:"function",zh:"功能，职务"},
+  {en:"electrics",zh:"电力系统，电学"},
+  {en:"parallel",zh:"平行的，类似的"},
+  {en:"temple",zh:"教堂，寺庙"},
+  // Day 7 (121-140)
+  {en:"critical",zh:"批评的，挑剔的，关键的"},
+  {en:"insulation",zh:"绝缘，隔离"},
+  {en:"reform",zh:"改革"},
+  {en:"evolution",zh:"进化"},
+  {en:"resistant",zh:"抵抗的"},
+  {en:"carpet",zh:"地毯"},
+  {en:"charity",zh:"慈善"},
+  {en:"canoe",zh:"独木舟"},
+  {en:"fountain",zh:"喷泉"},
+  {en:"herb",zh:"药草"},
+  {en:"balcony",zh:"阳台"},
+  {en:"software",zh:"软件"},
+  {en:"reinforce",zh:"加固"},
+  {en:"automatic",zh:"自动的，无意识的，必然的"},
+  {en:"cottage",zh:"小屋，村舍"},
+  {en:"resource",zh:"资源"},
+  {en:"tank",zh:"箱，罐，坦克"},
+  {en:"vary",zh:"改变"},
+  {en:"refectory",zh:"餐厅"},
+  {en:"unaware",zh:"没有发觉的"},
+  // Day 8 (141-160)
+  {en:"research",zh:"研究，调查"},
+  {en:"marine",zh:"船舶，海运业"},
+  {en:"arrangement",zh:"布置，安排"},
+  {en:"massage",zh:"按摩"},
+  {en:"avenue",zh:"林荫道，大街"},
+  {en:"skyscraper",zh:"摩天大楼"},
+  {en:"trend",zh:"趋势"},
+  {en:"recreation",zh:"娱乐"},
+  {en:"dining room",zh:"餐厅"},
+  {en:"tunnel",zh:"隧道"},
+  {en:"item",zh:"项目"},
+  {en:"military",zh:"军事的，军队"},
+  {en:"venue",zh:"审判地，集合地，场所"},
+  {en:"tailor",zh:"裁缝"},
+  {en:"cruise",zh:"巡航，漫游，游艇"},
+  {en:"fluctuation",zh:"波动"},
+  {en:"pattern",zh:"模式，图案"},
+  {en:"summit",zh:"顶点"},
+  {en:"discipline",zh:"纪律，学科"},
+  {en:"craftsman",zh:"工匠，手艺人"},
+  // Day 9 (161-180)
+  {en:"shelter",zh:"避难所，遮蔽物"},
+  {en:"catering",zh:"承办酒席"},
+  {en:"strait",zh:"海峡"},
+  {en:"cooperative",zh:"合作的"},
+  {en:"density",zh:"密度，浓度"},
+  {en:"vertical",zh:"垂直的"},
+  {en:"stem",zh:"干，茎"},
+  {en:"ash",zh:"灰烬"},
+  {en:"thesis",zh:"论文"},
+  {en:"poverty",zh:"贫乏，缺少"},
+  {en:"execution",zh:"处决，执行"},
+  {en:"vacant",zh:"空的"},
+  {en:"modular",zh:"组合式的，模块化的"},
+  {en:"smell",zh:"气味，嗅"},
+  {en:"pest",zh:"害虫"},
+  {en:"flute",zh:"长笛"},
+  {en:"regrettable",zh:"遗憾的"},
+  {en:"encyclopedia",zh:"百科全书"},
+  {en:"stretch",zh:"伸展"},
+  {en:"kiosk",zh:"亭，报摊"},
+  // Day 10 (181-200)
+  {en:"silver",zh:"银"},
+  {en:"surgery",zh:"手术，外科，诊所"},
+  {en:"spine",zh:"脊柱"},
+  {en:"flaw",zh:"缺陷，瑕疵，裂缝"},
+  {en:"fist",zh:"拳头，用拳头打"},
+  {en:"magnificent",zh:"壮丽的，宏伟的，极好的"},
+  {en:"memorial",zh:"纪念碑，纪念仪式，纪念的"},
+  {en:"mint",zh:"薄荷"},
+  {en:"blow",zh:"殴打，吹，打击"},
+  {en:"conflict",zh:"冲突，战斗，矛盾"},
+  {en:"roll",zh:"卷，滚动，滚"},
+  {en:"interactive",zh:"交互的，相互作用的"},
+  {en:"chestnut",zh:"栗子，栗色的"},
+  {en:"backyard",zh:"后院，后院的"},
+  {en:"Stonehenge",zh:"巨石阵"},
+  {en:"procrastination",zh:"拖延，耽搁"},
+  {en:"personality",zh:"个性，特色"},
+  {en:"mother-in-law",zh:"婆婆，岳母"},
+  {en:"ape",zh:"猿"},
+  {en:"immigrant",zh:"移民，侨民"},
+  // Day 11 (201-220)
+  {en:"bacon",zh:"培根，咸肉"},
+  {en:"smooth",zh:"光滑的，平稳的，消除"},
+  {en:"prime",zh:"最好的，首要的，全盛时期"},
+  {en:"replica",zh:"复制品"},
+  {en:"muscle",zh:"肌肉"},
+  {en:"celebrate",zh:"庆祝，庆贺"},
+  {en:"wholesale",zh:"批发，大规模的，批发的"},
+  {en:"renewable",zh:"可更新的，可再生的"},
+  {en:"rumor",zh:"谣言，传闻"},
+  {en:"graphics",zh:"绘图学，制图法"},
+  {en:"skeptical",zh:"怀疑的"},
+  {en:"dignitary",zh:"高贵的人，高管"},
+  {en:"ox",zh:"牛，公牛"},
+  {en:"pretend",zh:"假装，装作"},
+  {en:"ballroom",zh:"舞厅"},
+  {en:"instant",zh:"瞬间，立即"},
+  {en:"silt",zh:"淤泥"},
+  {en:"buildup",zh:"集结，增长"},
+  {en:"blind",zh:"盲目的，瞎的，百叶窗"},
+  {en:"modify",zh:"修改，更改"},
+  // Day 12 (221-240)
+  {en:"lyrics",zh:"歌词"},
+  {en:"elusive",zh:"难懂的，难捉摸的"},
+  {en:"optimistic",zh:"乐观的"},
+  {en:"elegant",zh:"优雅的，雅致的"},
+  {en:"capture",zh:"捕获，占领"},
+  {en:"curve",zh:"曲线，弯曲，弧线"},
+  {en:"leap",zh:"跳跃，跃过"},
+  {en:"vigour",zh:"精力"},
+  {en:"identify",zh:"认同，鉴别"},
+  {en:"conducive",zh:"有助的，有益的"},
+  {en:"tale",zh:"故事，传说"},
+  {en:"briefcase",zh:"公文包"},
+  {en:"scene",zh:"情景，场景"},
+  {en:"brave",zh:"勇敢的，英勇的"},
+  {en:"isle",zh:"岛，群岛"},
+  {en:"disastrous",zh:"灾难性的，极糟的"},
+  {en:"assistance",zh:"帮助，援助"},
+  {en:"recall",zh:"回忆，召回"},
+  {en:"greedy",zh:"贪婪的"},
+  {en:"medium",zh:"媒介，媒体"},
+  // Day 13 (241-260)
+  {en:"curry",zh:"咖喱粉，咖喱饭菜"},
+  {en:"invest",zh:"投资，投入"},
+  {en:"flax",zh:"亚麻，麻布"},
+  {en:"appropriate",zh:"适当的"},
+  {en:"steamship",zh:"轮船，汽船"},
+  {en:"stressful",zh:"紧张的，压力重的"},
+  {en:"efficient",zh:"效率高的，胜任的"},
+  {en:"minor",zh:"未成年人，轻微的，次要的"},
+  {en:"equal",zh:"平等的，等于，相等的"},
+  {en:"endangered",zh:"濒于灭绝的"},
+  {en:"obvious",zh:"明显的，显然的"},
+  {en:"plural",zh:"复数的，复数"},
+  {en:"screenplay",zh:"电影剧本，剧本"},
+  {en:"craft",zh:"工艺，手艺"},
+  {en:"aggressive",zh:"有进取心的，侵略的"},
+  {en:"resume",zh:"重新开始，简历"},
+  {en:"absolute",zh:"绝对的，确实的"},
+  {en:"cocktail",zh:"鸡尾酒"},
+  {en:"represent",zh:"代表，表现"},
+  {en:"buffalo",zh:"水牛，威吓"},
+  // Day 14 (261-280)
+  {en:"tense",zh:"紧张的，绷紧的，时态"},
+  {en:"professional",zh:"专业的，职业的"},
+  {en:"pitch",zh:"球场，音高"},
+  {en:"bilateral",zh:"双边的，左右对称的"},
+  {en:"durability",zh:"持久性，耐久性"},
+  {en:"spur",zh:"刺激，促进"},
+  {en:"shallow",zh:"浅的，薄的"},
+  {en:"superficial",zh:"表面的，肤浅的"},
+  {en:"slight",zh:"轻微的，微小的"},
+  {en:"puma",zh:"美洲狮"},
+  {en:"piano",zh:"钢琴"},
+  {en:"lordly",zh:"不可一世的，高贵的，高傲的"},
+  {en:"shortlist",zh:"候选人名单"},
+  {en:"inpatient",zh:"住院病人"},
+  {en:"undergrowth",zh:"矮树丛"},
+  {en:"outpatient",zh:"门诊病人"},
+  {en:"vulnerable",zh:"脆弱的，易受伤害的"},
+  {en:"exclusive",zh:"唯一的，排外的，独占的"},
+  {en:"witness",zh:"证人，目击，见证"},
+  {en:"divorce",zh:"离婚，分离"},
+  // Day 15 (281-300)
+  {en:"glow",zh:"光辉，热情"},
+  {en:"hunger",zh:"饥饿，渴望"},
+  {en:"bulletin",zh:"公报，发表，期刊"},
+  {en:"hedgehog",zh:"刺猬"},
+  {en:"spicy",zh:"辛辣的，香的"},
+  {en:"soda",zh:"汽水，苏打"},
+  {en:"barely",zh:"几乎不，勉强"},
+  {en:"omelette",zh:"煎蛋卷"},
+  {en:"causeway",zh:"堤道"},
+  {en:"dental",zh:"牙齿的，牙科的"},
+  {en:"cucumber",zh:"黄瓜"},
+  {en:"beast",zh:"兽，畜牲"},
+  {en:"devil",zh:"魔鬼，坏人"},
+  {en:"comma",zh:"逗号，停顿"},
+  {en:"breast",zh:"乳房，胸脯"},
+  {en:"brilliant",zh:"卓越的，灿烂的，美妙的"},
+  {en:"brew",zh:"酿造，酝酿"},
+  {en:"jealous",zh:"妒忌的，羡慕的"},
+  {en:"frost",zh:"霜，霜冻，结霜"},
+  {en:"harmonious",zh:"和谐的，和睦的"},
+  // Day 16 (301-320)
+  {en:"aptitude",zh:"天资，资质，才能"},
+  {en:"vivid",zh:"生动的，鲜艳的"},
+  {en:"tragic",zh:"悲惨的，悲剧的"},
+  {en:"halftime",zh:"中场休息时间"},
+  {en:"perceive",zh:"认为，理解，注意到"},
+  {en:"attempt",zh:"企图，尝试"},
+  {en:"rage",zh:"大怒，狂暴"},
+  {en:"transmission",zh:"传输，传播"},
+  {en:"likelihood",zh:"可能性"},
+  {en:"resemble",zh:"像，与…相似"},
+  {en:"dense",zh:"密集的，稠密的，浓密的"},
+  {en:"contribute",zh:"贡献，捐助，投稿"},
+  {en:"auditory",zh:"听觉的，听众"},
+  {en:"distressing",zh:"使人痛苦的，令人烦恼的"},
+  {en:"pave",zh:"铺路，铺设"},
+  {en:"halt",zh:"停止，暂停，中止"},
+  {en:"arid",zh:"干燥的，枯燥的，无趣的"},
+  {en:"downpour",zh:"倾盆大雨"},
+  {en:"reception",zh:"接待处，接待"},
+  {en:"racket",zh:"球拍，喧闹"},
+  // Day 17 (321-340)
+  {en:"fluctuate",zh:"波动，动摇"},
+  {en:"thrive",zh:"繁荣，兴旺，茁壮成长"},
+  {en:"absurd",zh:"荒唐的，可笑的"},
+  {en:"slippery",zh:"滑的，狡猾的，不可靠的"},
+  {en:"aerospace",zh:"航空航天工业，太空的"},
+  {en:"hilarious",zh:"欢闹的，愉快的"},
+  {en:"overwhelming",zh:"势不可挡的，无法抗拒的"},
+  {en:"sensible",zh:"明智的，实际的，可觉察的"},
+  {en:"exotic",zh:"奇异的，异国的，外来的"},
+  {en:"awkward",zh:"尴尬的，笨拙的"},
+  {en:"supreme",zh:"最高的，至上的"},
+  {en:"resist",zh:"抵制，抵抗"},
+  {en:"address",zh:"讲话，住址，处理"},
+  {en:"initiative",zh:"自发的，首创精神，主动权"},
+  {en:"authorization",zh:"批准，授权"},
+  {en:"lexical",zh:"词汇的，词典的"},
+  {en:"defer",zh:"推迟，延期"},
+  {en:"spree",zh:"欢闹，狂饮作乐"},
+  {en:"unveil",zh:"揭开，公布"},
+  {en:"bathtub",zh:"浴缸"},
+  // Day 18 (341-360)
+  {en:"cookery",zh:"烹饪"},
+  {en:"initiate",zh:"开始，创始，启蒙"},
+  {en:"persistence",zh:"坚持，毅力"},
+  {en:"ritual",zh:"仪式，典礼"},
+  {en:"tap",zh:"水龙头，开发，利用"},
+  {en:"serenity",zh:"宁静，沉着"},
+  {en:"assign",zh:"分配，指定"},
+  {en:"ascent",zh:"上升，提升，上坡路"},
+  {en:"deception",zh:"欺诈，诡计，骗局"},
+  {en:"overload",zh:"超载，负荷"},
+  {en:"alcoholic",zh:"酒精的"},
+  {en:"federation",zh:"联合，联邦，联盟"},
+  {en:"sprinter",zh:"短跑运动员"},
+  {en:"grin",zh:"露齿而笑"},
+  {en:"gymnast",zh:"体操运动员"},
+  {en:"artistic",zh:"艺术的"},
+  {en:"roar",zh:"咆哮，吼叫，轰鸣"},
+  {en:"ribbon",zh:"缎带，带状物"},
+  {en:"patent",zh:"专利，特许"},
+  {en:"cylinder",zh:"气缸，圆柱体"},
+];
+
+const TOTAL = ALL_WORDS.length;
+const PER_DAY = 20;
+const NUM_DAYS = Math.ceil(TOTAL / PER_DAY);
+
+// ============================================================
+// STATE
+// ============================================================
+let progress = loadProgress();
+
+let currentDay = 0;
+let currentMode = 'mc'; // 'mc' or 'type'
+let currentIdx = 0;
+let dayWords = [];
+let answered = false;
+let sessionCorrect = 0;
+let sessionWrong = 0;
+let sessionWrongWords = [];
+let maxStreak = 0;
+let currentStreak = 0;
+let retryMode = false;
+
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem('ielts_progress');
+    return saved ? JSON.parse(saved) : {};
+  } catch(e) { return {}; }
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem('ielts_progress', JSON.stringify(progress));
+  } catch(e) {}
+}
+
+function getWordKey(word) { return word.en; }
+
+function getDayWords(day) {
+  const start = day * PER_DAY;
+  return ALL_WORDS.slice(start, start + PER_DAY);
+}
+
+function getDayStats(day) {
+  const words = getDayWords(day);
+  let correct = 0, wrong = 0, tried = 0;
+  words.forEach(w => {
+    const p = progress[getWordKey(w)];
+    if (p) {
+      tried++;
+      if (p.status === 'correct') correct++;
+      else if (p.status === 'wrong') wrong++;
+    }
+  });
+  return { correct, wrong, tried, total: words.length };
+}
+
+// ============================================================
+// HOME SCREEN
+// ============================================================
+function renderHome() {
+  const grid = document.getElementById('days-grid');
+  grid.innerHTML = '';
+
+  let totalTried = 0, totalCorrect = 0, doneDays = 0;
+
+  for (let d = 0; d < NUM_DAYS; d++) {
+    const s = getDayStats(d);
+    const pct = s.tried > 0 ? Math.round(s.correct / s.tried * 100) : 0;
+    const done = s.tried === s.total;
+    if (done) doneDays++;
+    totalTried += s.tried;
+    totalCorrect += s.correct;
+
+    const startW = d * PER_DAY + 1;
+    const endW = Math.min((d + 1) * PER_DAY, TOTAL);
+
+    const card = document.createElement('div');
+    card.className = 'day-card' + (done ? ' done' : '');
+    card.innerHTML = `
+      ${done ? '<div class="day-badge complete">✓</div>' : ''}
+      <div class="day-num">第 ${d+1} 天</div>
+      <div class="day-range">#${startW}–${endW}</div>
+      <div class="day-bar">
+        <div class="day-bar-fill" style="width:${s.tried/s.total*100}%;background:${done?'var(--green)':'linear-gradient(90deg,var(--accent),var(--accent2))'}"></div>
+      </div>
+      <div class="day-meta">
+        <span>${s.tried}/${s.total} 词</span>
+        <span class="acc" style="color:${pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)'}">${s.tried>0?pct+'%':'—'}</span>
+      </div>
+    `;
+    card.onclick = () => startDay(d);
+    grid.appendChild(card);
+  }
+
+  // overall stats
+  document.getElementById('stat-done').textContent = doneDays;
+  document.getElementById('stat-words').textContent = totalTried;
+  const overallAcc = totalTried > 0 ? Math.round(totalCorrect / totalTried * 100) + '%' : '—';
+  document.getElementById('stat-acc').textContent = overallAcc;
+  document.getElementById('nav-progress').textContent = Math.round(totalTried / TOTAL * 100) + '%';
+  document.getElementById('nav-acc').textContent = overallAcc;
+  document.getElementById('book-total').textContent = TOTAL;
+}
+
+// ============================================================
+// QUIZ
+// ============================================================
+function startDay(day, retryWords) {
+  currentDay = day;
+  retryMode = !!retryWords;
+  dayWords = retryWords || shuffle([...getDayWords(day)]);
+  currentIdx = 0;
+  sessionCorrect = 0;
+  sessionWrong = 0;
+  sessionWrongWords = [];
+  maxStreak = 0;
+  currentStreak = 0;
+
+  const d = getDayWords(day);
+  const startW = day * PER_DAY + 1;
+  const endW = Math.min((day+1)*PER_DAY, TOTAL);
+  document.getElementById('quiz-title').textContent = `第 ${day+1} 天${retryMode ? ' · 重练错题' : ''}`;
+  document.getElementById('quiz-subtitle').textContent = `单词 ${startW}–${endW}`;
+
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (currentIdx >= dayWords.length) {
+    showResult();
+    return;
+  }
+
+  answered = false;
+  const word = dayWords[currentIdx];
+  const total = dayWords.length;
+
+  // progress
+  const pct = Math.round(currentIdx / total * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('q-progress-txt').textContent = `第 ${currentIdx+1} 题，共 ${total} 题`;
+  document.getElementById('q-progress-pct').textContent = pct + '%';
+  document.getElementById('word-num').textContent = `单词 ${currentIdx+1} / ${total}`;
+  document.getElementById('word-en').textContent = word.en;
+  document.getElementById('word-hint').textContent = '请选择或输入中文含义';
+
+  // score
+  document.getElementById('sc-correct').textContent = sessionCorrect;
+  document.getElementById('sc-wrong').textContent = sessionWrong;
+  const tried = sessionCorrect + sessionWrong;
+  document.getElementById('sc-acc').textContent = tried > 0 ? Math.round(sessionCorrect/tried*100)+'%' : '—';
+
+  // feedback
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback';
+  fb.innerHTML = '';
+
+  if (currentMode === 'mc') {
+    renderMC(word);
+  } else {
+    renderType(word);
+  }
+}
+
+function renderMC(word) {
+  document.getElementById('mc-area').style.display = 'block';
+  document.getElementById('type-area').style.display = 'none';
+
+  // Reset action row (no btn-check in MC mode)
+  document.getElementById('action-row').innerHTML =
+    '<button class="btn btn-secondary" onclick="skipWord()">跳过</button>';
+
+  // Pick 3 distractors fresh every time
+  const pool = ALL_WORDS.filter(w => w.en !== word.en);
+  const wrongs = shuffle(pool).slice(0, 3).map(w => w.zh);
+  const opts = shuffle([word.zh, ...wrongs]);
+
+  const grid = document.getElementById('options-grid');
+  grid.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectOption(btn, opt, word.zh);
+    grid.appendChild(btn);
+  });
+}
+
+function selectOption(btn, selected, correct) {
+  if (answered) return;
+  answered = true;
+
+  // Lock all option buttons and highlight correct answer
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    if (b.textContent === correct) b.classList.add('reveal-correct');
+  });
+
+  const isCorrect = selected === correct;
+  if (isCorrect) {
+    btn.classList.add('selected-correct');
+    markCorrect();
+  } else {
+    btn.classList.add('selected-wrong');
+    markWrong();
+  }
+
+  showFeedback(isCorrect, correct, dayWords[currentIdx]);
+
+  // Show Next button — user must click to advance
+  document.getElementById('action-row').innerHTML = `
+    <button class="btn btn-secondary" onclick="skipWord()" style="flex:0.4">重练</button>
+    <button class="btn btn-primary" onclick="nextWord()" id="btn-next" autofocus>下一个 →</button>
+  `;
+  document.getElementById('btn-next').focus();
+}
+
+function renderType(word) {
+  document.getElementById('mc-area').style.display = 'none';
+  document.getElementById('type-area').style.display = 'block';
+
+  // Rebuild action row first (creates btn-check fresh)
+  document.getElementById('action-row').innerHTML =
+    '<button class="btn btn-secondary" onclick="skipWord()" style="flex:0.4">跳过</button>' +
+    '<button class="btn btn-primary" id="btn-check" onclick="checkAnswer()">确认答案</button>';
+
+  const input = document.getElementById('answer-input');
+  input.value = '';
+  input.className = 'answer-input';
+  input.disabled = false;
+  input.focus();
+  input.onkeydown = (e) => { if (e.key === 'Enter') checkAnswer(); };
+}
+
+function checkAnswer() {
+  if (answered) { nextWord(); return; } // double-click safety
+
+  const word = dayWords[currentIdx];
+  const input = document.getElementById('answer-input');
+  const userAns = input.value.trim();
+
+  if (!userAns) { showToast('请输入答案'); return; }
+
+  answered = true;
+  input.disabled = true;
+
+  // Flexible matching: check if user answer overlaps with any part of zh
+  const correctParts = word.zh.split(/[，,、；;]/);
+  const isCorrect = correctParts.some(part => {
+    const p = part.trim();
+    return p && (userAns.includes(p) || p.includes(userAns));
+  });
+
+  if (isCorrect) {
+    input.className = 'answer-input correct-input';
+    markCorrect();
+  } else {
+    input.className = 'answer-input wrong-input';
+    markWrong();
+  }
+
+  showFeedback(isCorrect, word.zh, word);
+
+  document.getElementById('action-row').innerHTML = `
+    <button class="btn btn-secondary" onclick="skipWord()" style="flex:0.5">重练</button>
+    <button class="btn btn-primary" onclick="nextWord()">下一个 →</button>
+  `;
+}
+
+function showFeedback(isCorrect, correctAns, word) {
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    fb.className = 'feedback correct show';
+    fb.innerHTML = `<strong>✅ 正确！</strong>${word.en} = ${correctAns}`;
+    document.getElementById('word-hint').textContent = correctAns;
+  } else {
+    fb.className = 'feedback wrong show';
+    fb.innerHTML = `<strong>❌ 错误</strong>正确答案：${correctAns}`;
+    document.getElementById('word-hint').textContent = '→ ' + correctAns;
+  }
+}
+
+function markCorrect() {
+  sessionCorrect++;
+  currentStreak++;
+  if (currentStreak > maxStreak) maxStreak = currentStreak;
+  const word = dayWords[currentIdx];
+  progress[getWordKey(word)] = { status: 'correct', ts: Date.now() };
+  saveProgress();
+}
+
+function markWrong() {
+  sessionWrong++;
+  currentStreak = 0;
+  const word = dayWords[currentIdx];
+  progress[getWordKey(word)] = { status: 'wrong', ts: Date.now() };
+  sessionWrongWords.push(word);
+  saveProgress();
+}
+
+function nextWord() {
+  currentIdx++;
+  renderQuestion();
+}
+
+function skipWord() {
+  // put current word at end for retry
+  const word = dayWords.splice(currentIdx, 1)[0];
+  dayWords.push(word);
+  answered = false;
+  renderQuestion();
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('mode-mc').className = 'mode-btn' + (mode === 'mc' ? ' active' : '');
+  document.getElementById('mode-type').className = 'mode-btn' + (mode === 'type' ? ' active' : '');
+  renderQuestion();
+}
+
+// ============================================================
+// RESULT
+// ============================================================
+function showResult() {
+  const total = dayWords.length;
+  const acc = total > 0 ? Math.round(sessionCorrect / total * 100) : 0;
+
+  document.getElementById('result-acc').textContent = acc + '%';
+  document.getElementById('r-correct').textContent = sessionCorrect;
+  document.getElementById('r-wrong').textContent = sessionWrong;
+  document.getElementById('r-total').textContent = total;
+  document.getElementById('r-streak').textContent = maxStreak;
+
+  let emoji = '😤', title = '继续加油！', sub = '错误较多，建议重练错题';
+  if (acc >= 90) { emoji = '🏆'; title = '太棒了！'; sub = '正确率超高，继续保持！'; }
+  else if (acc >= 75) { emoji = '🎉'; title = '完成今日练习！'; sub = '不错的成绩，继续加油！'; }
+  else if (acc >= 60) { emoji = '💪'; title = '今日完成！'; sub = '有一些错题，建议重练'; }
+
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-subtitle').textContent = sub;
+
+  const wrongEl = document.getElementById('wrong-list');
+  if (sessionWrongWords.length > 0) {
+    wrongEl.innerHTML = `<h3>❌ 错题 (${sessionWrongWords.length}个)</h3>` +
+      sessionWrongWords.map(w =>
+        `<div class="wrong-item"><span class="w-en">${w.en}</span><span class="w-zh">${w.zh}</span></div>`
+      ).join('');
+  } else {
+    wrongEl.innerHTML = '<div style="text-align:center;color:var(--green);font-size:28px;margin-bottom:8px">🎯</div><div style="text-align:center;color:var(--muted2);font-size:14px">全部答对，太厉害了！</div>';
+  }
+
+  const retryBtn = document.getElementById('btn-retry');
+  if (retryBtn) retryBtn.style.display = sessionWrongWords.length > 0 ? 'block' : 'none';
+
+  showScreen('result');
+}
+
+function retryWrong() {
+  if (sessionWrongWords.length === 0) return;
+  startDay(currentDay, shuffle([...sessionWrongWords]));
+}
+
+// ============================================================
+// WORD BOOK
+// ============================================================
+let bookFilter = 'all';
+
+function filterBook(f) {
+  bookFilter = f;
+  ['all','wrong','correct','untried'].forEach(id => {
+    document.getElementById('f-'+id).className = 'filter-btn' + (f===id?' active':'');
+  });
+  renderBook();
+}
+
+function renderBook() {
+  const tbody = document.getElementById('book-tbody');
+  tbody.innerHTML = '';
+  const dayMap = {};
+  ALL_WORDS.forEach((w, i) => { dayMap[w.en] = Math.floor(i / PER_DAY) + 1; });
+
+  ALL_WORDS.forEach(w => {
+    const p = progress[getWordKey(w)];
+    const status = p ? p.status : 'untried';
+    if (bookFilter !== 'all' && status !== bookFilter) return;
+
+    const dotClass = status === 'correct' ? 'correct' : status === 'wrong' ? 'wrong' : 'untried';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="en-cell">${w.en}</td>
+      <td class="zh-cell">${w.zh}</td>
+      <td class="day-cell">第${dayMap[w.en]}天</td>
+      <td><span class="status-dot ${dotClass}"></span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('active'));
+  if (name === 'home') { document.getElementById('bnav-home').classList.add('active'); renderHome(); }
+  if (name === 'book') { document.getElementById('bnav-book').classList.add('active'); renderBook(); }
+}
+
+function goHome() {
+  showScreen('home');
+}
+
+// ============================================================
+// UTILS
+// ============================================================
+function shuffle(arr) {
+  for (let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderHome();
+
+// Keyboard: Space/Enter to go next after answering
+document.addEventListener('keydown', (e) => {
+  const quizActive = document.getElementById('screen-quiz').classList.contains('active');
+  if (!quizActive) return;
+  if (e.key === ' ' || e.key === 'Enter') {
+    // Only if in MC mode and already answered
+    if (currentMode === 'mc' && answered) {
+      e.preventDefault();
+      nextWord();
+    }
+  }
+  // Number keys 1-4 to select options in MC mode
+  if (currentMode === 'mc' && !answered) {
+    const num = parseInt(e.key);
+    if (num >= 1 && num <= 4) {
+      const btns = document.querySelectorAll('.opt-btn');
+      if (btns[num - 1]) btns[num - 1].click();
+    }
+  }
+});
+</script>
+</body>
+</html>
